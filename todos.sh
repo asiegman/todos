@@ -19,8 +19,11 @@ todo () {
             display_todos
             ;;
         *)
-            [[ $# > 1 ]] && add_todo $*
-            display_todos
+            if [ $# -eq 0 ] ; then
+                display_todos
+            else
+                add_todo $*
+            fi
             ;;
     esac
 }
