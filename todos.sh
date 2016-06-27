@@ -34,9 +34,14 @@ remove_todo () {
 }
 
 display_todos () {
+    local lines=0
     if [ -f ${TODO_FILE} ] ; then
-        echo "TODO:"
-        cat -n ${TODO_FILE}
-        echo
+        lines=$(cat ${TODO_FILE} | wc -l | tr -d '[[:space:]'])
+        if [ $lines -gt 0 ] ; then
+            echo "$lines TODO(s):"
+            cat -n ${TODO_FILE}
+        else
+            echo "No TODOs!"
+        fi
     fi
 }
